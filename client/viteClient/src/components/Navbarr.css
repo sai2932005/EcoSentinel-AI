@@ -1,0 +1,90 @@
+
+html{
+    font-size: 62.5%;
+}
+
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    background-color: #1b4332;
+    color:white;
+    padding:1rem 2rem ;
+}
+
+.navbarList{
+    display: flex;
+    text-decoration: none;
+    list-style: none;
+    gap:1.5rem ; 
+    padding:1.5rem ;
+    
+}
+.navbarList a {
+    text-decoration: none; 
+    color:white ;
+    font-weight: 500;
+    font-size: 1.8rem;
+    padding: 1rem;
+}
+.ToggleBtn{
+    display: none;
+    border:none;
+    color:white;
+    background:none;
+    cursor:pointer ;
+
+}
+.navBarLogo{
+    font-weight: bold;
+    padding:1rem;
+    font-size: 1.9rem;
+    
+}
+
+.navbarList a:hover{
+    color:#b7e4c7;
+}
+
+
+@media(max-width:40rem){
+    html{
+        font-size: 50%;
+
+    }
+}
+
+
+@media (max-width:31rem){
+    .ToggleBtn{
+        display: block;
+        
+
+    }
+    .navbarList{
+        display: none;
+        flex-direction : column;
+        position:absolute;
+        top:6rem;
+        
+        right:0px;
+        min-height: 100vh;
+        padding: 1rem 2rem;
+        width:20rem;
+
+
+        background-color: #1b4332;
+        padding: 1rem;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        border-radius: 8px;
+        
+
+
+    }
+    .navbarList.open{
+        display: flex;
+        
+    }
+
+
+}

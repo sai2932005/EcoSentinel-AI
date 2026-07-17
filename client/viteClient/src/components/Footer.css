@@ -1,0 +1,17 @@
+html{
+    font-size: 62.5%;
+}
+.footer{
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.4rem;
+    background-color: #1b4332;
+    color:white;
+    margin-top: auto;
+}
+
+@media (max-width:30rem){
+    html{
+        font-size: 50%;
+    }
+}

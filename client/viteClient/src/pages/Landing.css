@@ -1,0 +1,109 @@
+html{
+    font-size:62.5%;
+}
+
+.landing{
+    display: flex;
+    flex-direction: column;
+    gap:2rem;
+    padding: 2rem;
+    background-color: #fafdfb;
+    font-size: 20px;
+}
+
+.hero{
+    text-align: center;
+    background:linear-gradient(135deg, #d8f3dc, #b7e4c7);
+    padding:2rem 2rem;
+    border-radius: 12px;
+    margin-bottom: 0;
+}
+.hero h1{
+    font-size: 3.4rem;
+    margin-bottom: 0.5rem;
+}
+.hero p{
+    font-size: 1.5rem;
+    color: #2d6a4f;
+    margin-bottom: 1.5rem;
+}
+.ctaBtn{
+    display: inline-block;
+    background-color: #1b4332;
+    border-radius: 9px;
+    padding:1rem 1rem;
+    color:white;
+    text-decoration:none;
+    cursor: pointer;
+    font-size:2rem;
+}
+
+.ctaBtn:hover{
+    background-color:#2d6a4f;
+}
+
+.whycard{
+    max-width: 900px;
+    margin:0 auto;
+    background-color: white;
+    width:100%;
+    padding:1rem 2rem;
+    border-radius: 1rem;
+    border-left: 5px solid #40916c;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+
+}
+.whycard h2 {
+  margin-top: 0;
+  color: #1b4332;
+}
+.whycard p{
+    font-size: 1.7rem;
+    margin:1rem 0;
+}
+.how_it_works{
+    background-color: #f1f8f4;
+    padding:1rem 1.2rem;
+    border-radius: 1.2rem;
+}
+
+.how_it_works h2{
+    text-align: center;
+    margin-bottom: 1rem;
+     color: #1b4332;
+}
+.steps{
+    display: flex;
+    justify-content: center;
+    gap:2rem;
+    flex-wrap: wrap;
+
+}
+.step{
+    text-align: center;
+    border: 1px solid #d8f3dc;
+    background-color: white;
+    border-radius: 1rem;
+    padding:1rem;
+    font-size: 1.7rem;
+    width:200px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+.stepNumber{
+    display: inline-block;
+    background-color: #40916c;
+    color: white;
+    width: 32px;
+    line-height: 32px;
+    border-radius: 50%;
+    font-weight: bold;
+    margin-bottom: 0.8rem;
+    height: 32px;
+
+}
+
+@media (max-width:31rem){
+    html{
+        font-size: 50%;
+    }
+}
