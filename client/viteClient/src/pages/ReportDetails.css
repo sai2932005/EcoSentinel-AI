@@ -1,0 +1,98 @@
+.detailsPage{
+    max-width: 700px;
+    margin:0 auto;
+    padding:2rem 1rem ;
+
+}
+.back-link{
+    display:inline-block;
+    margin-bottom: 1.5rem;
+    text-decoration: none;
+    padding:1rem;
+    font-weight:500;
+    font-size: 1.3rem;
+    background-color:lightblue ;
+    border-radius: 9px;
+
+}
+
+.back-link:hover{
+    text-decoration: underline;
+}
+.detailsCard{
+    background-color: white;
+  border: 1px solid #d8f3dc;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+}
+.detailsImage{
+    width:100%;
+    
+    object-fit: cover;
+    display: block;
+    border-radius: 7px;
+    margin-bottom: 1rem;
+}
+
+.detailsHeader{
+    display:flex;
+    
+    align-items: center;
+    padding:1.2rem 1.5rem 0;
+    gap:2rem;
+
+}
+.severity-badge{
+    color:white;
+    font-weight: 700;
+    border-radius: 7px;
+    padding:0.7rem;
+    font-size: 13px;
+
+}
+
+.details-header h1 {
+  color: #1b4332;
+  font-size: 1.3rem; 
+  margin: 0;
+   padding: 1rem 1.5rem 0;
+  font-weight: 500;
+}
+.confidence{
+     padding: 1rem 1.5rem 0;
+    font-size:15px ;
+    font-weight: 500;
+    color:#555;
+}
+
+.detailsSection {
+  padding: 1rem 1.5rem 0;
+}
+.detailsSection p{
+    font-size:1.4rem;
+}
+
+.detailsSection h2 {
+  color: #1b4332;
+  margin-bottom: 0.3rem;
+  font-size: 1.5rem;
+}
+
+
+.metaDetails{
+  padding: 1rem 1.5rem 1.5rem;
+  border-top: 2px solid lightblue;
+  margin-top: 1rem;
+  color: #444;
+  font-size: 0.95rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+
+}
+
+.metaDetails p{
+    font-size: 1.4rem;
+}
