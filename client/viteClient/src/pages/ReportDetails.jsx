@@ -51,7 +51,7 @@ const ReportDetails =  ()=>{
   useEffect(() => {
     const fetchReport = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/reports/${id}`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/reports/${id}`);
         if (!response.ok) {
           throw new Error('Report not found');
         }
@@ -105,7 +105,7 @@ const ReportDetails =  ()=>{
             <Link to="/dashboard" className='back-link'>Back to Dashboard</Link>
             <div className='detailsCard'>
                <img
-  src={`http://localhost:5000${report.image}`}
+  src={`${import.meta.env.VITE_API_URL}${report.image}`}
   alt={report.issueType}
   className='detailsImage'/>
 

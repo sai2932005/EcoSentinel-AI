@@ -21,7 +21,7 @@ function Dashboard(){
     useEffect(() => {
         const fetchReports = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/reports');
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/reports`);
             if (!response.ok) throw new Error('Failed to load reports');
             const data = await response.json();
             setReports(data);

@@ -81,7 +81,7 @@ function ReportIssue() {
       const formData = new FormData();
       formData.append('image', imageFile);
 
-      const response = await fetch('http://localhost:5000/api/analyze', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/analyze`, {
         method: 'POST',
         body: formData,
       });
@@ -117,7 +117,7 @@ function ReportIssue() {
       formData.append('confidence', aiResult.confidence);
       formData.append('recommendation', aiResult.recommendation);
 
-      const response = await fetch('http://localhost:5000/api/reports', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/reports`, {
         method: 'POST',
         body: formData,
       });
