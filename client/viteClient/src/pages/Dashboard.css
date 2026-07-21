@@ -120,3 +120,16 @@
     font-weight: 600;
 
 }
+
+
+
+/* Add to Dashboard.css if not already present */
+.status-text {
+  text-align: center;
+  color: #555;
+  padding: 2rem;
+}
+
+.status-text.error {
+  color: #c0392b;
+}

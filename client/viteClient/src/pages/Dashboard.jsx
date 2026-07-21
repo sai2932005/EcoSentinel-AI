@@ -1,6 +1,6 @@
 
 import "./Dashboard.css"
-
+import { useState,useEffect } from "react";
 const dummyReports = [
   { id: '1', issueType: 'Garbage Dumping', severity: 'High' },
   { id: '2', issueType: 'Water Leak', severity: 'Medium' },
@@ -12,13 +12,43 @@ const dummyReports = [
 
 function Dashboard(){
 
-    const totalReports = dummyReports.length;
 
-    const severityCounts = dummyReports.reduce((acc,report)=>{
+
+    const [reports, setReports] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchReports = async () => {
+        try {
+            const response = await fetch('http://localhost:5000/api/reports');
+            if (!response.ok) throw new Error('Failed to load reports');
+            const data = await response.json();
+            setReports(data);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+        };
+         fetchReports();
+  }, []);
+
+  if (loading) {
+    return <div className="dashboard-page"><p>Loading dashboard...</p></div>;
+  }
+
+  if (error) {
+    return <div className="dashboard-page"><p className="status-text error">{error}</p></div>;
+  }
+
+    const totalReports = reports.length;
+
+    const severityCounts = reports.reduce((acc,report)=>{
         acc[report.severity] = (acc[report.severity] ||0) +1 ;
         return acc ;
     },{})
-    const categoryCounts = dummyReports.reduce((acc,reports)=>{
+    const categoryCounts = reports.reduce((acc,reports)=>{
         acc[reports.issueType] = (acc[reports.issueType]|| 0) +1 ;
         return acc ;
     },{}) ;
@@ -38,7 +68,7 @@ function Dashboard(){
         Low: 1,
     };
 
-    const sortedbySeverity = [...dummyReports].sort((a,b)=> severityRank[b.severity] - severityRank[a.severity]) ;
+    const sortedbySeverity = [...reports].sort((a,b)=> severityRank[b.severity] - severityRank[a.severity]) ;
 
     const mostUrgent = sortedbySeverity.slice(0,3) ;
 
@@ -48,6 +78,9 @@ function Dashboard(){
     return(
         <div className="dashboardPage">
             <h1>Dashboard</h1>
+            {totalReports === 0 ? (
+        <p className="status-text">No reports yet. Be the first to report an issue!</p>
+      ) : (<>
 
             <div className="summary-cards">
                 <div className="card">
@@ -99,8 +132,10 @@ function Dashboard(){
                         ))}
                     </ul>
                 </div>
+                </>)} 
   
-        </div>
+        </div>  
+        
     )
 }
 

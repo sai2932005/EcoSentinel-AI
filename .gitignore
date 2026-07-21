@@ -1,6 +1,8 @@
 # Dependencies
 node_modules/
 **/node_modules/
+server/uploads/*
+!server/uploads/.gitkeep
 
 # Environment variables
 .env

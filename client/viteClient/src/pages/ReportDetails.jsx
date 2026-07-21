@@ -1,5 +1,5 @@
 import{Link, useParams} from 'react-router-dom';
-
+import {useState,useEffect} from 'react' ;
 import "./ReportDetails.css"
 
 const dummyReports = [
@@ -44,12 +44,42 @@ const ReportDetails =  ()=>{
     const {id} = useParams();
 
 
-    const report = dummyReports.find((r) => r.id == id) ;
+  const [report, setReport] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchReport = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/reports/${id}`);
+        if (!response.ok) {
+          throw new Error('Report not found');
+        }
+        const data = await response.json();
+        setReport(data);
+        
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchReport();
+  }, [id]) 
+
+
+  if (loading) {
+    return <div className="details-page"><p>Loading report...</p></div>;
+  }
+
+
+  
 
     
 
 
-    if(!report){
+    if(error || !report){
         return(
 
         
@@ -64,6 +94,9 @@ const ReportDetails =  ()=>{
         )
     }
 
+    console.log(report) ;
+    console.log(report.image);
+
 
 
 
@@ -71,7 +104,10 @@ const ReportDetails =  ()=>{
         <div className='detailsPage'>
             <Link to="/dashboard" className='back-link'>Back to Dashboard</Link>
             <div className='detailsCard'>
-                <img src={report.image} alt={report.issueType} className='detailsImage'/>
+               <img
+  src={`http://localhost:5000${report.image}`}
+  alt={report.issueType}
+  className='detailsImage'/>
 
 
                 <div className='detailsHeader'>
@@ -80,6 +116,16 @@ const ReportDetails =  ()=>{
 
 
                 </div>
+
+
+                {report.confirmedCount > 1 && (
+                  <p className="confirmed-badge">
+                    ✅ Confirmed by {report.confirmedCount} people
+                  </p>
+                )}
+
+
+
                 <p className='confidence'>AI Confidence : {report.confidence}%</p>
                 <div className='detailsSection'>
                     <h2>Description :</h2>
@@ -92,7 +138,7 @@ const ReportDetails =  ()=>{
                 </div>
 
                 <div className='metaDetails'>
-                    <p><strong>Location : </strong>{report.lat.toFixed(4)}, {report.lng.toFixed(4)}</p>
+                    <p><strong>Location:</strong> {report.address || `${report.latitude.toFixed(4)}, ${report.longitude.toFixed(4)}`}</p>
                     <p><strong>Status : </strong>{report.status}</p>
                     <p><strong>Reported on : </strong>{report.createdAt}</p>
                 </div>

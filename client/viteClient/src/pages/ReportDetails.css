@@ -30,10 +30,19 @@
 .detailsImage{
     width:100%;
     
-    object-fit: cover;
+    object-fit: contain;
     display: block;
     border-radius: 7px;
     margin-bottom: 1rem;
+}
+
+
+.confirmed-badge {
+  padding: 0 1.5rem;
+  color: #2d6a4f;
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin: 1rem 0 0;
 }
 
 .detailsHeader{

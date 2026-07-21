@@ -1,5 +1,6 @@
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import {useState,useEffect} from 'react'
 import {Link} from 'react-router-dom' 
 import 'leaflet/dist/leaflet.css';
 import L from "leaflet";
@@ -10,6 +11,25 @@ import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
 delete L.Icon.Default.prototype._getIconUrl;
+const severityColors = {
+  Low: '#40916c',
+  Medium: '#f4a261',
+  High: '#e76f51',
+  Critical: '#c0392b',
+};
+
+
+
+const severitySize = {
+  Low: 22,
+  Medium: 26,
+  High: 32,
+  Critical: 38,
+};
+
+
+
+
 
 L.Icon.Default.mergeOptions({
     iconRetinaUrl : markerIcon2x ,
@@ -17,27 +37,51 @@ L.Icon.Default.mergeOptions({
     shadowUrl:markerShadow
 }) ;
 
-const dummyReports = [
-  {
-    id: '1',
-    issueType: 'Garbage Dumping',
-    severity: 'High',
-    lat: 17.385,
-    lng: 78.4867,
-  },
-  {
-    id: '2',
-    issueType: 'Water Leak',
-    severity: 'Medium',
-    lat: 17.4,
-    lng: 78.47,
-  },
-];
+
+function getSeverityIcon(severity) {
+  const color = severityColors[severity] || '#888';
+  const size = severitySize[severity] || 24;
+ return L.divIcon({
+    className: 'custom-marker',
+    html: `<div style="
+      background-color: ${color};
+      width: ${size}px;
+      height: ${size}px;
+      border-radius: 50%;
+      border: 2px solid white;
+      box-shadow: 0 0 4px rgba(0,0,0,0.4);
+    "></div>`,
+    iconSize: [size, size],
+    iconAnchor: [size / 2, size / 2],
+  });
+}
+
 
 
 function MapPage(){
 
+    const [reports, setReports] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
     const centerPosition = [17.385, 78.4867];
+      useEffect(() => {
+    const fetchReports = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/reports');
+        if (!response.ok) throw new Error('Failed to load reports');
+        const data = await response.json();
+        setReports(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchReports();
+  }, []);
+
 
 
     return(
@@ -58,14 +102,16 @@ function MapPage(){
                 
                 />
 
-                {dummyReports.map((report)=>(
-                    <Marker key={report.id} position={[report.lat,report.lng]}> 
+                {reports.map((report)=>(
+                    <Marker key={report._id} position={[report.latitude,report.longitude]} icon={getSeverityIcon(report.severity)}> 
                     <Popup className='popupDetails'>
                         <strong>{report.issueType}</strong>
                         <br/>
+                        {report.address}
+                        <br/>
                         Severity: {report.severity}
                         <br/>
-                        <Link to={`/report/${report.id}`}>View Details</Link>
+                        <Link to={`/report/${report._id}`}>View Details</Link>
 
                     </Popup>
 
