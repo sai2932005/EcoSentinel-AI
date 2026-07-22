@@ -21,7 +21,7 @@ const createReport = async(req,res)=>{
         const SEVEN_DAYS_AGO = new Date(Date.now() - 7 *24 *60*60*1000) ;
 
 
-        const imagePath  = req.file ? `/uploads/${req.file.filename}` : null   ;
+        const imagePath = req.file ? req.file.path : null;
         const existingReport = await Report.findOne({
             issueType,
             latitude :{$lte : lat+RAD , $gte : lat - RAD},

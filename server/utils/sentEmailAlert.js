@@ -16,7 +16,7 @@ const sendEmailAlert = async(toEmails,report)=>{
           <p><strong>Recommended Action:</strong> ${report.recommendation}</p>
           <p><strong>Location:</strong> ${report.address}</p>
           <p>
-            <a href="http://localhost:5173/report/${report._id}" 
+            <a href="${process.env.FRONTEND_URL}/report/${report._id}" 
                style="background-color: #1b4332; color: white; padding: 10px 18px; 
                       border-radius: 6px; text-decoration: none; display: inline-block; margin-top: 10px;">
               View Full Report

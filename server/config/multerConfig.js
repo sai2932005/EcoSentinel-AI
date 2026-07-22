@@ -3,17 +3,20 @@ const multer = require('multer') ;
 const path = require('path') ;
 const {v4 :uuidv4}  = require("uuid") ;
 
-const storage =  multer.diskStorage({
-    destination : (req,file,cb)=>{
-        cb(null,'uploads/')
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const cloudinary = require('./cloudinaryConfig.js');
 
-    },
-    filename :(req,file,cb) => {
-        const uniqueName = `${uuidv4()}${path.extname(file.originalname)}`;
-        cb(null,uniqueName) ;
 
+const storage = new CloudinaryStorage({
+    cloudinary : cloudinary ,
+    params:{
+        folder : 'ecosentinel-reports',
+        allowed_formats : ['jpg','jpeg','png'],
     }
 }) ;
+
+
+
 
 
 const fileFilter = (req,file,cb) =>{

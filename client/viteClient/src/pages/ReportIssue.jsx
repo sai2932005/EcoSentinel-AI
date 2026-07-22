@@ -64,6 +64,7 @@ function ReportIssue() {
   // Step 1: send image to Gemini for analysis (nothing saved yet)
   const handleAnalyze = async (e) => {
     e.preventDefault();
+     console.log('API URL is:', import.meta.env.VITE_API_URL);
     setAnalysisError(null);
 
     if (!imageFile) {

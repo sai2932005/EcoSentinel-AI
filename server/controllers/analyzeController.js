@@ -1,6 +1,7 @@
 
 
 const fs = require('fs') ;
+
 const ai = require('../config/geminiConfig.js') ;
 
 const analyzer =async(req,res)=>{
@@ -10,8 +11,14 @@ const analyzer =async(req,res)=>{
         return res.status(400).json({message:"No image provided"}) ;
     }
       
-    const imageBuffer = fs.readFileSync(req.file.path) ;
-    const base64Img = imageBuffer.toString('base64') ;
+
+        const imageResponse = await fetch(req.file.path);
+    const imageArrayBuffer = await imageResponse.arrayBuffer();
+    const base64Img = Buffer.from(imageArrayBuffer).toString('base64');
+
+
+
+
     
 
     
@@ -83,12 +90,20 @@ const analyzer =async(req,res)=>{
 
     res.status(200).json({
       ...analysis,
-      imagePath: `/uploads/${req.file.filename}`,
+      imagePath:req.file.path,
     });
 
   } catch (error) {
-    console.error('Gemini analysis error:', error);
-    res.status(500).json({ message: 'AI analysis failed', error: error.message });
+    
+  console.log('=== FULL ERROR OBJECT ===');
+  console.log(error);
+  console.log('=== ERROR MESSAGE ===');
+  console.log(error.message);
+  console.log('=== ERROR NAME ===');
+  console.log(error.name);
+  res.status(500).json({ message: 'AI analysis failed', error: error.message });
+
+  
   }
 
 };
