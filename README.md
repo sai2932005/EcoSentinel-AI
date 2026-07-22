@@ -1,5 +1,7 @@
 # 🌱 EcoSentinel AI
 
+**Lve Demo Link** https://eco-sentinel-ai.vercel.app/
+
 **Turn what you see into action.**
 
 EcoSentinel AI empowers citizens to become environmental inspectors by turning photos of environmental issues into structured, location-aware, AI-classified reports — verified by humans, mapped for communities, and pushed directly to NGOs and municipal responders.
