@@ -95,12 +95,7 @@ const analyzer =async(req,res)=>{
 
   } catch (error) {
     
-  console.log('=== FULL ERROR OBJECT ===');
-  console.log(error);
-  console.log('=== ERROR MESSAGE ===');
-  console.log(error.message);
-  console.log('=== ERROR NAME ===');
-  console.log(error.name);
+  
   res.status(500).json({ message: 'AI analysis failed', error: error.message });
 
   
